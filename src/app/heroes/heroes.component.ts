@@ -15,7 +15,7 @@ export class HeroesComponent {
   //   name: 'Windstorm',
   // };
   //variable//
-  selectedHero?: Hero;
+  // selectedHero?: Hero;
   //variable//
   //Array//
   heroes: Hero[] = [];
@@ -35,10 +35,10 @@ export class HeroesComponent {
   // onSelect(hero: Hero): void {
   //   this.selectedHero = hero;
 
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
-  }
+  // onSelect(hero: Hero): void {
+  //   this.selectedHero = hero;
+  //   this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
+  // }
   //onClick fuction//
 
   //Fetching and Pushing data to Array//
