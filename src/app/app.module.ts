@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ParentComponent } from './family-data/parent/parent.component';
 import { ChildComponent } from './family-data/child/child.component';
+import { TodoComponent } from './todo/todo.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ChildComponent } from './family-data/child/child.component';
     FormsComponent,
     ParentComponent,
     ChildComponent,
+    TodoComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],

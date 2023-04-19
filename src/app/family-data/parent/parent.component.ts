@@ -30,7 +30,7 @@ export class ParentComponent {
   ChildDataEvent: any;
 
   receivedMessage: string = '';
-  toggler: boolean = false;
+  toggler: boolean | null = null;
 
   parentData: string = `"Hi child, this is parent data"`;
 
@@ -50,6 +50,7 @@ export class ParentComponent {
 
     if (data.eventType == 'submitParent') {
       this.parentInfo = data.parentData;
+      this.toggler = false;
     }
     //   this.receivedMessage = message;
     // }

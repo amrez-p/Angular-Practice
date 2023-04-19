@@ -43,10 +43,10 @@ interface ParentData {
 export class ChildComponent {
   //variable
   message: string = 'Hello from child component!';
-  toggle: boolean = false;
+  toggle: boolean | null = true;
   ParentData: ParentData = {
     name: '',
-    age: 0,
+    age: null,
     married: false,
   };
   // ParentData: any = {
@@ -119,6 +119,11 @@ export class ChildComponent {
       eventType: 'submitParent',
     };
     this.ChildDataEvent.emit(SubmitParent);
+    this.ParentData = {
+      name: '',
+      age: null,
+      married: false,
+    };
   }
 
   constructor() {}
