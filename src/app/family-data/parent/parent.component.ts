@@ -12,32 +12,45 @@ import { Component } from '@angular/core';
   template: `
     <app-child
       [childData]="parentData"
-      (ChildDataEvent)="receiveMessage($event)"
+      (ChildDataEvent)="receiveData($event)"
     ></app-child>
+    <p *ngIf="receivedMessage && !toggler">{{ receivedMessage }}</p>
 
-    <p *ngIf="receivedMessage">{{ receivedMessage }}</p>
-    <!-- <ul>
-      <li>name: {{ ChildDataEvent.name }}</li>
-      <li>age: {{ ChildDataEvent.age }}</li>
-      <li>married: {{ ChildDataEvent.married }}</li>
-    </ul> -->
+    <ul *ngIf="parentInfo">
+      <!-- <li>name: {{ parentInfo.address.contacts.name }}</li> -->
+      <li>name: {{ parentInfo.name }}</li>
+      <li>age: {{ parentInfo.age }}</li>
+      <li>married: {{ parentInfo.married }}</li>
+    </ul>
   `,
 })
 export class ParentComponent {
-  // parentInfo: parentInfo = {
-  //   name: '',
-  //   age: 4,
-  //   married: false,
-  // };
+  parentInfo: any;
 
   constructor() {}
   ChildDataEvent: any;
 
   receivedMessage: string = '';
+  toggler: boolean = false;
 
-  parentData: string = `"Parent send data to child"`;
+  parentData: string = `"Hi child, this is parent data"`;
 
-  receiveMessage({ message }: any): void {
-    this.receivedMessage = message;
+  // receiveMessage({ message }: any): void {
+  //   this.receivedMessage = message;
+  // }
+
+  receiveData(data: any): void {
+    console.log(data);
+    if (data.eventType == 'childMessage') {
+      this.receivedMessage = data.message;
+
+      // this.toggler = data.toggle;
+    }
+
+    if (data.eventType == 'submitParent') {
+      this.parentInfo = data.parentData;
+    }
+    //   this.receivedMessage = message;
+    // }
   }
 }

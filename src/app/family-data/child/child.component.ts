@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 interface ParentData {
   name: string;
-  age: number;
+  age: number | null;
   married: boolean;
 }
 
@@ -17,16 +17,24 @@ interface ParentData {
       style="display:grid; grid-row-gap: 5px; "
     >
       <label>Name:</label>
-      <input type="text" name="name" ngModel="ParentData.name" required />
-      <label>age:</label>
-      <input type="number" name="age" ngModel="ParentData.age" required />
-      <label>married:</label>
       <input
-        type="checkbox"
-        name="married"
-        ngModel="ParentData.married"
+        type="text"
+        name="name"
+        [(ngModel)]="ParentData.name"
+        placeholder=""
         required
       />
+      <label>age:</label>
+      <input
+        type="number"
+        name="age"
+        max="80"
+        min="1"
+        [(ngModel)]="ParentData.age"
+        required
+      />
+      <label>married:</label>
+      <input type="checkbox" name="married" ngModel="ParentData.married" />
       <!-- <input type="checkbox" name="married" ngModel="ParentData.name" required /> -->
 
       <button type="submit" [disabled]="!myForm.valid">Submit</button>
@@ -34,13 +42,41 @@ interface ParentData {
 })
 export class ChildComponent {
   //variable
-  message = 'Hello from child component!';
-
+  message: string = 'Hello from child component!';
+  toggle: boolean = false;
   ParentData: ParentData = {
     name: '',
     age: 0,
     married: false,
   };
+  // ParentData: any = {
+  //   name: 'jhon',
+  //   age: 0,
+  //   address: {
+  //     street: '123 Main St',
+  //     city: 'Anytown',
+  //     state: 'CA',
+  //     country: 'USA',
+  //     zipCode: '12345',
+  //     location: {
+  //       latitude: 37.7749,
+  //       longitude: -122.4194,
+  //     },
+  //     contacts: {
+  //       name: 'aa',
+  //       phone: '555-1234',
+  //     },
+  //   },
+  //   hobbies: ['reading', 'swimming', 'hiking'],
+  //   education: {
+  //     school: {
+  //       name: 'ABC University',
+  //       location: 'Anytown, USA',
+  //     },
+  //     degree: 'Bachelor of Science',
+  //     major: 'Computer Science',
+  //   },
+  // };
   //variable
 
   //parameters
@@ -68,11 +104,20 @@ export class ChildComponent {
   //   this.ChildDataEvent.emit(SubmitParent);
   // }
   sendMessage() {
-    this.ChildDataEvent.emit(this.message);
+    const Messenger = {
+      message: this.message,
+      toggle: this.toggle,
+      eventType: 'childMessage',
+    };
+    this.ChildDataEvent.emit(Messenger);
   }
 
   onSubmit(): void {
-    this.ChildDataEvent.emit(this.ParentData);
+    const SubmitParent = {
+      parentData: { ...this.ParentData },
+      eventType: 'submitParent',
+    };
+    this.ChildDataEvent.emit(SubmitParent);
   }
 
   constructor() {}
