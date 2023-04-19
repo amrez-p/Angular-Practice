@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
       [childData]="parentData"
       (ChildDataEvent)="receiveData($event)"
     ></app-child>
-    <p *ngIf="receivedMessage && !toggler">{{ receivedMessage }}</p>
+    <p *ngIf="toggler">{{ receivedMessage }}</p>
 
     <ul *ngIf="parentInfo">
       <!-- <li>name: {{ parentInfo.address.contacts.name }}</li> -->
@@ -26,7 +26,6 @@ import { Component } from '@angular/core';
 })
 export class ParentComponent {
   parentInfo: any;
-
   constructor() {}
   ChildDataEvent: any;
 
@@ -43,9 +42,11 @@ export class ParentComponent {
     console.log(data);
     if (data.eventType == 'childMessage') {
       this.receivedMessage = data.message;
-
-      // this.toggler = data.toggle;
+      this.toggler = data.toggle;
     }
+    // else {
+    //   this.toggler = false;
+    // }
 
     if (data.eventType == 'submitParent') {
       this.parentInfo = data.parentData;

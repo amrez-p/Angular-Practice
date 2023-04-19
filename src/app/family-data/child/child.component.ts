@@ -43,6 +43,7 @@ interface ParentData {
 export class ChildComponent {
   //variable
   message: string = 'Hello from child component!';
+  toggle: boolean = false;
   ParentData: ParentData = {
     name: '',
     age: 0,
@@ -105,9 +106,11 @@ export class ChildComponent {
   sendMessage() {
     const Messenger = {
       message: this.message,
+      toggle: this.toggle,
       eventType: 'childMessage',
     };
     this.ChildDataEvent.emit(Messenger);
+    this.toggle = !this.toggle;
   }
 
   onSubmit(): void {
