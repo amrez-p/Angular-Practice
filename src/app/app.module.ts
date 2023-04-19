@@ -7,11 +7,26 @@ import { HeroesComponent } from './heroes/heroes.component';
 import { FormsModule } from '@angular/forms';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { MessagesComponent } from './messages/messages.component';
-import { DashboardComponent } from './dashboard/dashboard.component'; // <-- NgModel lives here
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { FormsComponent } from './forms/forms.component'; // <-- NgModel lives here
+
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { ParentComponent } from './family-data/parent/parent.component';
+import { ChildComponent } from './family-data/child/child.component';
 
 @NgModule({
-  declarations: [AppComponent, HeroesComponent, HeroDetailComponent, MessagesComponent, DashboardComponent],
-  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  declarations: [
+    AppComponent,
+    HeroesComponent,
+    HeroDetailComponent,
+    MessagesComponent,
+    DashboardComponent,
+    FormsComponent,
+    ParentComponent,
+    ChildComponent,
+  ],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
