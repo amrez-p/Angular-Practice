@@ -34,7 +34,7 @@ interface ParentData {
         required
       />
       <label>married:</label>
-      <input type="checkbox" name="married" ngModel="ParentData.married" />
+      <input type="checkbox" name="married" [(ngModel)]="ParentData.married" />
       <!-- <input type="checkbox" name="married" ngModel="ParentData.name" required /> -->
 
       <button type="submit" [disabled]="!myForm.valid">Submit</button>
@@ -43,7 +43,6 @@ interface ParentData {
 export class ChildComponent {
   //variable
   message: string = 'Hello from child component!';
-  toggle: boolean = false;
   ParentData: ParentData = {
     name: '',
     age: 0,
@@ -106,7 +105,6 @@ export class ChildComponent {
   sendMessage() {
     const Messenger = {
       message: this.message,
-      toggle: this.toggle,
       eventType: 'childMessage',
     };
     this.ChildDataEvent.emit(Messenger);
