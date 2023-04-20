@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 
+interface List {
+  id: number;
+  text: string;
+}
+
 @Component({
   selector: 'app-todo',
   // templateUrl: './todo.component.html',
@@ -25,9 +30,19 @@ import { Component } from '@angular/core';
         <!-- <ul *ngFor="let texts in text" style="display:grid; grid-row-gap:15px"> -->
         <ul style="display:grid; grid-row-gap:15px">
           <!-- <li *ngFor="let text; for: textArray"> -->
-          <li *ngFor="let text of textArray">
-            <span>{{ text }} </span>
-            <Button>delete</Button>
+          <li *ngFor="let textList of textArray">
+            <span>{{ textList.text }} </span>
+
+            <!-- <input type="text" [(ngModel)]="editTitle" /> -->
+            <Button *ngIf="textList" (click)="deleteIndex(textList)"
+              >delete</Button
+            >
+            <!-- <Button *ngIf="textList" (click)="updateIndex(textList)"
+              >update</Button
+            > -->
+            <Button *ngIf="textList" (click)="updateIndex(textList)"
+              >update</Button
+            >
           </li>
         </ul>
       </form>
@@ -37,15 +52,43 @@ import { Component } from '@angular/core';
 })
 export class TodoComponent {
   Text: string = '';
-  textArray: string[] = [];
+  editTitle: string = '';
+  textArray: List[] = [];
 
   onSubmit = () => {
-    this.textArray.push(this.Text);
+    let textList = { id: Date.now() + 1, text: this.Text };
+    this.textArray.push(textList);
     console.log(this.textArray);
     this.Text = '';
   };
 
+  updateIndex(textList: List) {
+    // Find the index of the todo in the array
+    const index = this.textArray.findIndex((t) => t.id === textList.id);
+    // Update the title of the todo in the array
+    // this.textArray[index].text = textList.text;
+    this.textArray[index].text = this.editTitle;
+    this.editTitle = '';
+  }
+
+  // updateIndex(index: number) {
+  //   console.log('Current editTitle:', this.editTitle);
+  //   this.textArray[index].text = this.editTitle;
+  // }
+  deleteIndex(textList: List) {
+    const dataIndex = this.textArray.findIndex((t) => t.id === textList.id);
+    this.textArray.splice(dataIndex, 1);
+    // this.textArray.filter((data, index): any => {
+    //   let DataIndex = this.textArray.findIndex((i) => i == index);
+    //   return data[DataIndex] !== index;
+    // if (data[index] == this.Text) {
+    //   return data[index] !== index;
+    // }
+    console.log(this.textArray);
+  }
+
   reset() {
     this.textArray = [];
+    console.log(this.textArray);
   }
 }

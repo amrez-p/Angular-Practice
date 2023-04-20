@@ -15,6 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ParentComponent } from './family-data/parent/parent.component';
 import { ChildComponent } from './family-data/child/child.component';
 import { TodoComponent } from './todo/todo.component';
+import { ApiComponent } from './api/api.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,8 +29,15 @@ import { TodoComponent } from './todo/todo.component';
     ParentComponent,
     ChildComponent,
     TodoComponent,
+    ApiComponent,
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
